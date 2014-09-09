@@ -11,12 +11,10 @@
 #import "CardMatchingGame.h"
 
 @interface CardGameViewController ()
-//@property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
-//@property (nonatomic) int flipsCount;
-@property (strong, nonatomic) Deck *deck;
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *modeSegment;
 @end
 
 @implementation CardGameViewController
@@ -29,42 +27,29 @@
 	return _game;
 }
 
-//- (Deck *)deck {
-//	if(!_deck) {
-//		_deck = [self createDeck];
-//	}
-//	
-//	return _deck;
-//}
-
 - (Deck *)createDeck {
 	return [[PlayingCardDeck alloc] init];
 }
 
-//- (void)setFlipsCount:(int)flipsCount{
-//	_flipsCount = flipsCount;
-//	self.flipsLabel.text = [NSString stringWithFormat:@"Flips: %d", self.flipsCount];
-//}
+- (int)matchMode {
+	if ([self.modeSegment selectedSegmentIndex] == 0) {
+		return TWO_CARDS_MATCH;
+	} else if ([self.modeSegment selectedSegmentIndex] == 1) {
+		return THREE_CARDS_MATCH;
+	}
+	return TWO_CARDS_MATCH;
+}
 
 - (IBAction)touchCardButton:(UIButton *)sender {
-//	if ([sender.currentTitle length]) {
-//		[sender setBackgroundImage:[UIImage imageNamed:@"cardback"]
-//						  forState:UIControlStateNormal];
-//		[sender setTitle:@"" forState:UIControlStateNormal];
-//	} else {
-//		Card *card = [self.deck drawRandomCard];
-//		if(card) {
-//			[sender setBackgroundImage:[UIImage imageNamed:@"cardfront"]
-//							  forState:UIControlStateNormal];
-//			[sender setTitle:[card contents] forState:UIControlStateNormal];
-//		}
-//	}
-	
 	int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
 	[self.game chooseCardAtIndex:chosenButtonIndex];
 	[self updateUI];
-	
-//	self.flipsCount++;
+}
+
+- (IBAction)touchDeal:(UIButton *)sender {
+	self.game = nil;
+	[self game];
+	[self updateUI];
 }
 
 - (void)updateUI {
@@ -85,5 +70,8 @@
 - (UIImage *)backgroundImageForCard:(Card *)card {
 	return [UIImage imageNamed:card.isChosen ? @"cardfront" : @"cardback"];
 }
+
+static const int TWO_CARDS_MATCH = 2;
+static const int THREE_CARDS_MATCH = 3;
 
 @end

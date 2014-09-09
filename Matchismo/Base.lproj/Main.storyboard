@@ -161,16 +161,49 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Psl-Ee-nsU">
-                                <rect key="frame" x="20" y="527" width="280" height="21"/>
+                                <rect key="frame" x="20" y="488" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pHP-fP-5r1">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem title="Mode:" id="dXv-cS-eJW"/>
+                                    <barButtonItem style="plain" id="c7Q-MJ-dbl">
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="z1D-PV-LyY">
+                                            <rect key="frame" x="75" y="7" width="135" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="2 Cards"/>
+                                                <segment title="3 Cards"/>
+                                            </segments>
+                                        </segmentedControl>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" id="3YV-pO-sgZ">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aTO-ww-uDM">
+                                            <rect key="frame" x="220" y="7" width="87" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Deal" backgroundImage="cardfront">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="touchDeal:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="9O6-24-qrA"/>
+                                            </connections>
+                                        </button>
+                                        <connections>
+                                            <action selector="KT:" destination="vXZ-lx-hvc" id="w8b-qY-gQZ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
+                        <outlet property="modeSegment" destination="z1D-PV-LyY" id="eHC-lO-zIw"/>
                         <outlet property="scoreLabel" destination="Psl-Ee-nsU" id="XMK-s8-E5Y"/>
                         <outletCollection property="cardButtons" destination="e8B-xP-Emy" id="od8-E4-QOu"/>
                         <outletCollection property="cardButtons" destination="evN-ce-4vS" id="Bar-7O-wr4"/>
@@ -192,6 +225,7 @@
     </scenes>
     <resources>
         <image name="cardback" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
