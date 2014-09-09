@@ -41,6 +41,7 @@
 }
 
 - (IBAction)touchCardButton:(UIButton *)sender {
+	self.modeSegment.enabled = NO;
 	int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
 	[self.game chooseCardAtIndex:chosenButtonIndex];
 	[self updateUI];
@@ -50,6 +51,7 @@
 	self.game = nil;
 	[self game];
 	[self updateUI];
+	self.modeSegment.enabled = YES;
 }
 
 - (void)updateUI {
